@@ -1,0 +1,130 @@
+html {
+    width:500px;
+    height:500px;
+    min-width: 500px;
+    min-height: 500px;
+    max-width: 500px;
+    max-height: 500px;
+    border: 1px solid white;
+    overflow:hidden;
+}
+body {
+    background-color: #191970;
+    color: white;
+}
+#update {
+    position:absolute;
+    left:10px;
+    top:10px;
+    width: 100px;
+}
+#compress {
+    position: absolute;
+    left: 100px;
+    top: 320px;
+    width: 100px;
+}
+#decompress {
+    position:absolute;
+    left:300px;
+    top:320px;
+    width: 100px;
+}
+#exit {
+    position:absolute;
+    left:10px;
+    top:460px;
+    width: 100px;
+}
+.button {
+    display: inline-block;
+    font-size: 50%;
+    color: rgba(255,255,255,.9);
+    text-shadow: #2e7ebd 0 1px 2px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.1;
+    white-space: pre-line;
+    padding: .7em 0;
+    border: 1px solid;
+    border-color: #60a3d8 #2970a9 #2970a9 #60a3d8;
+    border-radius: 6px;
+    outline: none;
+    background: #60a3d8 linear-gradient(#89bbe2, #60a3d8 50%, #378bce);
+    box-shadow: inset rgba(255,255,255,.5) 1px 1px;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.button:first-line{
+    font-size: 170%;
+    font-weight: 700;
+}
+.button:hover {
+    color: rgb(255,255,255);
+    background-image: linear-gradient(#9dc7e7, #74afdd 50%, #378bce);
+}
+.button:active {
+    color: rgb(255,255,255);
+    border-color: #2970a9;
+    background-image: linear-gradient(#5796c8, #6aa2ce);
+    box-shadow: none;
+}
+#headline {
+    font-family: fantasy;
+    position: absolute;
+    left: 190px;
+    top: 10px;
+    width:120px;
+    height:30px;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    font-size: 150%;
+    padding-left: 10px;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+#left {
+    position:absolute;
+    left:10px;
+    top:250px;
+    width: 240px;
+    height:50px;
+    border-bottom:1px solid white;
+    border-right:1px solid white;
+    overflow-x:scroll;
+}
+#right {
+    position:absolute;
+    left:250px;
+    top:250px;
+    width: 240px;
+    height:50px;
+    border-bottom:1px solid white;
+    border-left:1px solid white;
+    overflow-x:scroll;
+}
+#save {
+    position:absolute;
+    width:100px;
+    top: 460px;
+    left: 390px;
+}
+#onload {
+    position:absolute;
+    width:100px;
+    left:200px;
+    top:150px;
+}
+#fileContent {
+    position:absolute;
+    top:190px;
+    border:1px solid white;
+    width:480px;
+    height:50px;
+    overflow-x: scroll;
+    font-family: cursive;
+}
