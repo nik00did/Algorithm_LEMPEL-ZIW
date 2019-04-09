@@ -1,8 +1,7 @@
 let fixSize = () => {if(window.innerWidth>515 || window.innerHeight>540 || window.innerWidth<515 || window.innerHeight<540) window.resizeTo(515,540);};
 setInterval(fixSize,100);
-let globalString=[];
+let globalStringCompressed=[];
 let fileName="";
-let isOpenedFile=false;
 let LZW = {
     compress: function (uncompressed) {
         "use strict";
@@ -25,9 +24,9 @@ let LZW = {
         }
         // Output the code for w.
         if (w !== "") result.push(dictionary[w]);
-        for (let i=0;i<result.length;i++) globalString[i]=result[i];
+        for (let i=0;i<result.length;i++) globalStringCompressed[i]=result[i];
         for (let i=0;i<result.length;i++) result[i]=result[i].toString(2);
-        for (let i=0;i<result.length;i++) stringResult+=result[i];
+        for (let i=0;i<result.length;i++) i===0?stringResult+=result[i]:stringResult+=" "+result[i];
         return stringResult;
     },
     decompress: function (compressed) {
@@ -54,42 +53,78 @@ let LZW = {
 }; // For Test Purposes
 let compressContent = document.getElementById('left');
 let decompressContent = document.getElementById('right');
-let string="";
-let Compress, Decompress, FileContent = document.getElementById("fileContent");
-let openFile = () => {
-    if (isOpenedFile) alert("You have already onloaded a file! Update program to onload new file!");
-    else {
-        isOpenedFile = true;
-        compressContent.textContent = "";
-        decompressContent.textContent = "";
-        let input = document.createElement("input");
-        input.type = "file";
-        input.onchange = function () {
-            let fr = new FileReader();
-            fr.onload = function (info) {
-                string = info.target.result.toString();
-                FileContent.textContent = string;
-                Compress = LZW.compress(string);
-                Decompress = LZW.decompress(globalString);
-            };
-            fileName = this.files[0].name;
-            fr.readAsText(this.files[0], "CP1251");
+let compressedString="";
+let isOpendForCompress=false;
+let Compress, Decompress, FileContent = document.getElementById("fileContent"), FileContentDec=document.getElementById("decompressContent");
+let compressFile = () => {
+    compressContent.textContent = "";
+    isOpendForCompress=true;
+    let input = document.createElement("input");
+    input.type = "file";
+    input.onchange = function () {
+        let fr = new FileReader();
+        fr.onload = function (info) {
+            compressedString = info.target.result.toString();
+            FileContent.textContent = compressedString;
+            Compress = LZW.compress(compressedString);
+            compressContent.textContent = Compress;
         };
-        input.click();
-    }
+        fileName = this.files[0].name;
+        fr.readAsText(this.files[0], "CP1251");
+    };
+    input.click();
 };
-let startCompress = () => {
-    if (Compress===undefined) alert("You must onload file!");
-    compressContent.textContent = Compress;
+let decompressedString="";
+let isOpendForDecompress=false;
+let decompressFile = () => {
+    decompressContent.textContent = "";
+    isOpendForDecompress=true;
+    let input = document.createElement("input");
+    input.type = "file";
+    input.onchange = function () {
+        let fr = new FileReader();
+        fr.onload = function (info) {
+            decompressedString = info.target.result.toString();
+            FileContentDec.textContent = decompressedString;
+            decompressedString=decompressedString.split(" ");
+            for (let i=0;i<decompressedString.length;i++) decompressedString[i]=parseInt(decompressedString[i],2);
+            Decompress = LZW.decompress(decompressedString);
+            decompressContent.textContent = Decompress;
+        };
+        fileName = this.files[0].name;
+        fr.readAsText(this.files[0], "CP1251");
+    };
+    input.click();
 };
-let startDecompress = () => {
-    if(compressContent.textContent==="") alert("Firstly you have to compress information!");
-    else decompressContent.textContent = Decompress;
-};
-let saveTextAsFile = () =>{
-    if (fileName === "") alert("You haven't onloaded a file!");
+let saveCom = () =>{
+    if (!isOpendForCompress) alert("You haven't compressed any file!");
     else {
         let textToWrite = document.getElementById("left").textContent;
+        console.log(textToWrite);
+        let textFileAsBlob = new Blob([textToWrite], {type: 'text/plain'});
+        //var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+        let downloadLink = document.createElement("a");
+        downloadLink.download = fileName;
+        downloadLink.innerHTML = "Download File";
+        if (window.webkitURL != null) {
+            // Chrome allows the link to be clicked
+            // without actually adding it to the DOM.
+            downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+        } else {
+            // Firefox requires the link to be added to the DOM
+            // before it can be clicked.
+            downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+            downloadLink.onclick = destroyClickedElement;
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+        }
+        downloadLink.click();
+    }
+};
+let saveDec = () => {
+    if (!isOpendForDecompress) alert("You haven't decompessed any file!");
+    else {
+        let textToWrite = document.getElementById("right").textContent;
         console.log(textToWrite);
         let textFileAsBlob = new Blob([textToWrite], {type: 'text/plain'});
         //var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;

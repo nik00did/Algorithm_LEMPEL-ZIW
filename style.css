@@ -21,13 +21,13 @@ body {
 #compress {
     position: absolute;
     left: 100px;
-    top: 320px;
+    top: 150px;
     width: 100px;
 }
 #decompress {
     position:absolute;
     left:300px;
-    top:320px;
+    top:150px;
     width: 100px;
 }
 #exit {
@@ -107,23 +107,33 @@ body {
     border-left:1px solid white;
     overflow-x:scroll;
 }
-#save {
+#saveCompression {
     position:absolute;
     width:100px;
-    top: 460px;
-    left: 390px;
+    top: 320px;
+    left: 100px;
 }
-#onload {
+#saveDecompression {
     position:absolute;
     width:100px;
-    left:200px;
-    top:150px;
+    top: 320px;
+    left: 300px;
 }
 #fileContent {
     position:absolute;
     top:190px;
     border:1px solid white;
-    width:480px;
+    width:240px;
+    height:50px;
+    overflow-x: scroll;
+    font-family: cursive;
+}
+#decompressContent {
+    position:absolute;
+    top:190px;
+    left:250px;
+    border:1px solid white;
+    width:240px;
     height:50px;
     overflow-x: scroll;
     font-family: cursive;

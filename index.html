@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>LEMPEL-ZIW</title>
-	<link rel="stylesheet" href="./style.css"/>
-</head>
-<body>
-	<div id="headline">LEMPEL-ZIW</div>
-	<div id="left"></div>
-	<div id="right"></div>
-	<div class="button" id="onload" onClick="openFile()">ONLOAD</div>
-	<div id="fileContent">Here must be file's content.</div>
-	<div class="button" id="compress" onClick="startCompress()">COMPRESS</div>
-	<div class="button" id="decompress" onClick="startDecompress()">DECOMPRESS</div>
-	<div class="button" id="update" onClick="window.location.reload()">UPDATE</div>
-	<div class="button" id="save" onClick="saveTextAsFile()">SAVE</div>
-	<div class="button" id="exit" onClick="window.close()">EXIT</div>
-	<script src="./main.js"></script>
-</body>
+	<head>
+		<title>LEMPEL-ZIW</title>
+		<link rel="stylesheet" href="./style.css"/>
+	</head>
+	<body>
+		<div id="headline">LEMPEL-ZIW</div>
+		<div id="left"></div>
+		<div id="right"></div>
+		<div id="fileContent">Here must be file's content.</div>
+		<div id="decompressContent">Decompress content</div>
+		<div class="button" id="compress" onClick="compressFile()">COMPRESS</div>
+		<div class="button" id="decompress" onClick="decompressFile()">DECOMPRESS</div>
+		<div class="button" id="update" onClick="window.location.reload()">UPDATE</div>
+		<div class="button" id="saveCompression" onClick="saveCom()">SAVE COM</div>
+		<div class="button" id="saveDecompression" onClick="saveDec()">SAVE DEC</div>
+		<div class="button" id="exit" onClick="window.close()">EXIT</div>
+		<script src="./main.js"></script>
+	</body>
 </html>
